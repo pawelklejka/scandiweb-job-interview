@@ -1,6 +1,6 @@
 import React from 'react'
-import { Category } from '../Header'
 import { Link } from 'react-router-dom'
+import { Category } from '../../../types/types'
 
 function Navigation(categories: Array<Category>) {
   return (

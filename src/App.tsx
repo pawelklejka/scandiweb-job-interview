@@ -1,34 +1,31 @@
 import React, {  PureComponent } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { GET_CATEGORIES } from './service/junior-react-endpoint/queries/categories';
-import { useQuery } from '@apollo/client';
 import { client } from './service/junior-react-endpoint/client';
-class App extends PureComponent {
+import { GET_CURRENCIES } from './service/junior-react-endpoint/queries/currencies';
+import Header from './components/Header/Header';
 
+class App extends PureComponent {
+  state = {
+    categories: [],
+    currencies: [],
+    cart: {}
+  }
   componentDidMount(){
-    let name = client.query({query: GET_CATEGORIES})
-    .then(data => console.log(data))
+    client.query({query: GET_CATEGORIES})
+    .then(res => this.setState({categories: res.data.categories}))
+
+    client.query({query: GET_CURRENCIES})
+    .then(res => this.setState({currencies: res.data.currencies}))
+
+
     
   }
 
   render () {
     return(
       <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header categories={this.state.categories} currencies={this.state.currencies} cart={this.state.cart}/>
     </div>
     )
 

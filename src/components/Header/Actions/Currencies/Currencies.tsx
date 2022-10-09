@@ -1,8 +1,13 @@
 import React from 'react'
+import { Currency } from '../../../../types/types'
 
-function Currencies() {
+function Currencies({currencies}: Array<Currency>) {
   return (
-    <div>Currencies</div>
+    <div>
+        {currencies.map((currency: Currency) => {
+            return <li key={currency.label}>{currency.symbol}</li>
+        })}
+    </div>
   )
 }
 

@@ -1,25 +1,23 @@
 import React from 'react'
+import { ReactComponent as Logo } from '../../assets/svg/logo.svg'
+import { Cart, Category, Currency } from '../../types/types'
+import Actions from './Actions/Actions'
+import Navigation from './Navigation/Navigation'
 
-function Header({categories, currencies}: HeaderProps) {
+function Header(props: HeaderProps) {
   return (
     <header>
-        <Navigation categories={categories}/>
+        <Navigation categories={props.categories}/>
         <Logo />
-        <Actions currencies={currencies}/>
+        <Actions currencies={props.currencies} cart={props.cart}/>
     </header>
   )
 }
 
 export default Header
 
-export interface HeaderProps{
+export type HeaderProps = {
     categories: Array<Category>
     currencies: Array<Currency>
-}
-export interface Category{
-    name: string
-}
-export interface Currency {
-    label: string
-    symbol: string
+    cart: Cart
 }

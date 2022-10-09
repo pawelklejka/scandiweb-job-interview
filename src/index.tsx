@@ -5,14 +5,27 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './service/junior-react-endpoint/client';
+import { Provider } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const rootReducer = {
+  cart: cartReducer
+}
+
+const store = configureStore({
+  reducer: rootReducer
+})
+
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>
 );
